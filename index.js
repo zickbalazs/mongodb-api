@@ -1,10 +1,9 @@
 require('dotenv').config();
 let express = require('express'), app = express();
-let mongodb = require('mongodb')
+let mongodb = require('mongodb'), path = require('path'), multer = require('multer');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = `mongodb+srv://${process.env.USER}:${process.env.SECRET}@cluster0.sbtswn5.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(require('cors')())
