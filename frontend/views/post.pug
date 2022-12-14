@@ -1,0 +1,4 @@
+main
+    h2(class="my-3 mx-3")= post.title
+    each line in post.fulltext.split('\n')
+        p=line

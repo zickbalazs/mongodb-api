@@ -1,0 +1,10 @@
+main
+    h2(class="my-3 mx-3") Recent posts
+    div(class="mx-auto w-100 row" onclick="ShowPost()")
+        each post in posts
+            div(class="col-lg-4 mb-3")
+                div(class="card post border border-2 rounded border-dark")
+                    h3(class="mx-2 mt-3 card-title")= post.title
+                    div.card-body 
+                        p= post.description
+                        a(href=`/post/${post._id}` class="btn btn-primary") Read Post

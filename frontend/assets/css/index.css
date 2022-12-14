@@ -1,0 +1,20 @@
+:root{
+    --primary: #b67f2d;
+    --secondary:#f09f36;
+    --link: #f8cd58;
+}
+#body{
+    min-height: 100vh;
+    display:flex;
+    flex-flow:column wrap;
+}
+.post{
+    transition: transform 0.2s;
+}
+.post:hover{
+    transform: scale(102.5%);
+    overflow: hidden;
+}
+main{flex: 1 1 auto;}
+header, footer{text-align: center; background-color:var(--secondary);}
+header{padding-top:5vh; padding-bottom:5vh;}
