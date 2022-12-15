@@ -3,6 +3,9 @@
     --secondary:#f09f36;
     --link: #f8cd58;
 }
+#edit{
+    display: none;
+}
 #body{
     min-height: 100vh;
     display:flex;
@@ -14,6 +17,9 @@
 .post:hover{
     transform: scale(102.5%);
     overflow: hidden;
+}
+.desc{
+    
 }
 main{flex: 1 1 auto;}
 header, footer{text-align: center; background-color:var(--secondary);}

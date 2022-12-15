@@ -1,0 +1,44 @@
+main 
+    div(class="my-3 container")
+        div(class="card")
+            div(class="bg-success card-header")
+                ul(class="nav nav-tabs card-header-tabs")
+                    li.nav-item
+                        a(class="nav-link text-light" id="addSwitch" href="#") Add post
+                    li.nav-item
+                        a(class="nav-link text-light" id="editSwitch" href="#") Modify posts
+            div.card-body#edit
+                h2.card-title Edit post
+                table(class="table table-bordered") 
+                    thead 
+                        tr 
+                            td ID 
+                            td Date
+                            td Title
+                            td Description 
+                            td Actions
+                    tbody 
+                        each post in posts
+                            tr 
+                                td=post._id
+                                td #{post.date.split('T')[0]} <br> #{post.date.split('T')[1].split('.')[0]}
+                                td=post.title
+                                td=post.description
+                                td
+                                    button(class="btn btn-warning me-1" onclick="asd()")
+                                        i(class="bi bi-pen-fill")
+                                    button(class="btn btn-danger")
+                                        i(class="bi bi-trash-fill") 
+            div.card-body#adder 
+                h2.card-title Add post
+                form
+                    div.mb-3
+                        label(for="title" class="form-label fs-3") Post title
+                        input(type="text" placeholder="A good title" name="title" class="form-control fs-5") 
+                    div.mb-3
+                        label(for="description" class="form-label fs-3") Short description
+                        input(type="text" placeholder="A good description" name="description" class="form-control fs-5") 
+                    div.mb-3
+                        label(for="fulltext" class="form-label fs-3") Post text
+                        textarea(name="fulltext" class="form-control") 
+                    input(type="button" class="btn btn-success" id="post" value="Add")

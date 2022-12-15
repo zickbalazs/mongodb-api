@@ -3,9 +3,9 @@ nav(class="navbar navbar-expand-lg navbar-dark bg-dark")
         button(class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#Links" aria-controls="Navbar" aria-expanded="false" aria-label="Toggle Navbar")
             span(class="navbar-toggler-icon")
         div(class="collapse navbar-collapse" id="Links")
-        ul.navbar-nav 
-            each link in links
-                li.nav-item
-                    a(class="nav-link" href=`${link.url}`)= link.name
+            ul.navbar-nav 
+                each link in links
+                    li.nav-item
+                        a(class="nav-link" href=`${link.url}`)= link.name
 
     

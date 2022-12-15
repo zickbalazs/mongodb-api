@@ -9,8 +9,10 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(require('cors')())
 app.use('/bootstrap', express.static(path.join(__dirname, './node_modules/bootstrap/dist')));
+app.use('/jquery', express.static(path.join(__dirname, './node_modules/jquery/dist')));
 app.use('/bootstrap-icons', express.static(path.join(__dirname, './node_modules/bootstrap-icons/font')));
 app.use('/css', express.static(path.join(__dirname, './frontend/assets/css')));
+app.use('/js', express.static(path.join(__dirname, './frontend/assets/js')));
 app.get('/', (req,res)=>{
     axios.get('http://localhost:8080/api/blogs').then(response=>{
         res.status(200).send(pug.compileFile('./frontend/blog.pug')({
@@ -26,6 +28,17 @@ app.get('/', (req,res)=>{
             links: require('./data'),
             posts: []
         }));
+    })
+})
+app.get('/admin', (req,res)=>{
+    axios.get('http://localhost:8080/api/blogs').then(response=>{
+        res.status(200).send(pug.compileFile('./frontend/admin.pug')({
+            appName:'PugBlog',
+            author:'ZB',
+            links:require('./data'),
+            posts:response.data
+        }));
+        
     })
 })
 app.get('/post/:id', (req,res)=>{
@@ -78,12 +91,8 @@ client.connect(err => {
     })
     app.post('/api/:table', (req,res)=>{
         let collection = database.collection(req.params.table)
-        let data = {
-            title: req.body.title,
-            description: req.body.description,
-            date: new Date(req.body.date)
-        };
-        collection.insertOne(data).then(result=>{
+        if (req.body.date != undefined) req.body.date = new Date(req.body.date);
+        collection.insertOne(req.body).then(result=>{
             res.send(result);
         }).catch(result=>{
             res.send(result);

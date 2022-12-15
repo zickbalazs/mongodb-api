@@ -1,4 +1,7 @@
+- var text = post.fulltext;
 main
-    h2(class="my-3 mx-3")= post.title
-    each line in post.fulltext.split('\n')
-        p=line
+    h2(class="mt-3 mx-3 fs-1")= post.title
+    h3(class="mb-3 mx-3 text-muted fs-2")=post.date
+    div(class="mx-3 fs-4")
+        p.text-muted= post.description
+        a(class="btn btn-success" href="/") Vissza
