@@ -13,55 +13,56 @@ app.use('/jquery', express.static(path.join(__dirname, './node_modules/jquery/di
 app.use('/bootstrap-icons', express.static(path.join(__dirname, './node_modules/bootstrap-icons/font')));
 app.use('/css', express.static(path.join(__dirname, './frontend/assets/css')));
 app.use('/js', express.static(path.join(__dirname, './frontend/assets/js')));
-app.get('/', (req,res)=>{
-    axios.get('http://localhost:8080/api/blogs').then(response=>{
-        res.status(200).send(pug.compileFile('./frontend/blog.pug')({
-            appName:'PugBlog',
-            author: 'ZB',
-            links: require('./data'),
-            posts: response.data
-        }));
-    }).catch(response=>{
-        res.status(200).send(pug.compileFile('./frontend/blog.pug')({
-            appName:'PugBlog',
-            author: 'ZB',
-            links: require('./data'),
-            posts: []
-        }));
-    })
-})
-app.get('/admin', (req,res)=>{
-    axios.get('http://localhost:8080/api/blogs').then(response=>{
-        res.status(200).send(pug.compileFile('./frontend/admin.pug')({
-            appName:'PugBlog',
-            author:'ZB',
-            links:require('./data'),
-            posts:response.data
-        }));
-        
-    })
-})
-app.get('/post/:id', (req,res)=>{
-    axios.get('http://localhost:8080/api/blogs/'+req.params.id).then(response=>{
-        res.status(200).send(pug.compileFile('./frontend/post.pug')({
-            appName:'PugBlog',
-            author:'ZB',
-            links:require('./data'),
-            post: response.data[0]
-        }));
-    }).catch(response=>{
-        res.status(200).send(pug.compileFile('./frontend/post.pug', {
-            appName:'PugBlog',
-            author:'ZB',
-            links:require('./data'),
-            post: {}
-        }))
-    })
-})
 
 client.connect(err => {
     console.log('connected')
     const database = client.db("CRUD_Blog");
+    app.get('/', (req,res)=>{
+        axios.get('http://localhost:8080/api/blogs').then(response=>{
+            res.status(200).send(pug.compileFile('./frontend/blog.pug')({
+                appName:'PugBlog',
+                author: 'ZB',
+                links: require('./data'),
+                posts: response.data
+            }));
+        }).catch(response=>{
+            res.status(200).send(pug.compileFile('./frontend/blog.pug')({
+                appName:'PugBlog',
+                author: 'ZB',
+                links: require('./data'),
+                posts: []
+            }));
+        })
+    })
+    app.get('/admin', (req,res)=>{
+        axios.get('http://localhost:8080/api/blogs').then(response=>{
+            res.status(200).send(pug.compileFile('./frontend/admin.pug')({
+                appName:'PugBlog',
+                author:'ZB',
+                links:require('./data'),
+                posts:response.data
+            }));
+            
+        })
+    })
+    app.get('/post/:id', (req,res)=>{
+        axios.get('http://localhost:8080/api/blogs/'+req.params.id).then(response=>{
+            res.status(200).send(pug.compileFile('./frontend/post.pug')({
+                appName:'PugBlog',
+                author:'ZB',
+                links:require('./data'),
+                post: response.data[0]
+            }));
+        }).catch(response=>{
+            res.status(200).send(pug.compileFile('./frontend/post.pug', {
+                appName:'PugBlog',
+                author:'ZB',
+                links:require('./data'),
+                post: {}
+            }))
+        })
+    })
+    
     app.get('/api/:table', (req,res)=>{
         let collection = database.collection(req.params.table);
         collection.find().toArray().then(results=>{

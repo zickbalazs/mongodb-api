@@ -12,11 +12,11 @@ main
                 table(class="table table-bordered") 
                     thead 
                         tr 
-                            td ID 
-                            td Date
-                            td Title
-                            td Description 
-                            td Actions
+                            th ID 
+                            th Date
+                            th Title
+                            th Description 
+                            th Actions
                     tbody 
                         each post in posts
                             tr 
@@ -24,12 +24,13 @@ main
                                 td #{post.date.split('T')[0]} <br> #{post.date.split('T')[1].split('.')[0]}
                                 td=post.title
                                 td=post.description
-                                td
-                                    button(class="btn btn-warning me-1" onclick="asd()")
+                                td(class="d-flex justify-content-center")
+                                    button(class="btn btn-warning me-1" data-bs-toggle="modal" data-bs-target="#modmodal" onclick=`Mod('${post._id}')`)
                                         i(class="bi bi-pen-fill")
-                                    button(class="btn btn-danger")
-                                        i(class="bi bi-trash-fill") 
+                                    button(class="btn btn-danger" onclick=`Delete('${post._id}')`)
+                                        i(class="bi bi-trash-fill")  
             div.card-body#adder 
+                div(class="alert alert-success d-none" id="alert")
                 h2.card-title Add post
                 form
                     div.mb-3
@@ -42,3 +43,27 @@ main
                         label(for="fulltext" class="form-label fs-3") Post text
                         textarea(name="fulltext" class="form-control") 
                     input(type="button" class="btn btn-success" id="post" value="Add")
+            div(class="modal fade" id="modmodal" tabindex="-1")
+                div.modal-dialog 
+                    div.modal-content 
+                        div.modal-header
+                            h2 Modify post # 
+                                span#modid
+                        div.modal-body
+                            form#mod
+                                div.mb-3
+                                    label(for="id" class="form-label" ) ID:
+                                    input(type="text" class="form-control" disabled name="id")
+                                div.mb-3
+                                    label(for="title" class="form-label") Title:
+                                    input(type="text" class="form-control" name="title")
+                                div.mb-3
+                                    label(for="description" class="form-label") Description:
+                                    input(type="text" class="form-control" name="description")
+                                div.mb-3
+                                    label(for="fulltext" class="form-label") Full text:
+                                    textarea(type="text" class="form-control" name="fulltext")
+                        div.modal-footer
+                            button(class="btn btn-success" onclick=`SubmitMod('${id}')`) Submit
+                            button(class="btn btn-danger" data-bs-dismiss="modal") Cancel
+
