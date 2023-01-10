@@ -23,7 +23,7 @@ client.connect(err => {
                 appName:'PugBlog',
                 author: 'ZB',
                 links: require('./data'),
-                posts: response.data
+                posts: response.data.sort((a, b)=>{return new Date(b.date) - new Date(a.date);})
             }));
         }).catch(response=>{
             res.status(200).send(pug.compileFile('./frontend/blog.pug')({

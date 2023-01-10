@@ -19,7 +19,7 @@ main
                             th Actions
                     tbody 
                         each post in posts
-                            tr 
+                            tr(id=`_${post._id}`)
                                 td=post._id
                                 td #{post.date.split('T')[0]} <br> #{post.date.split('T')[1].split('.')[0]}
                                 td=post.title
@@ -64,6 +64,6 @@ main
                                     label(for="fulltext" class="form-label") Full text:
                                     textarea(type="text" class="form-control" name="fulltext")
                         div.modal-footer
-                            button(class="btn btn-success" onclick=`SubmitMod('${id}')`) Submit
+                            button(class="btn btn-success" onclick="SubmitMod()") Submit
                             button(class="btn btn-danger" data-bs-dismiss="modal") Cancel
 

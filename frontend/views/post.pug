@@ -4,4 +4,9 @@ main
     h3(class="mb-3 mx-3 text-muted fs-2")=post.date
     div(class="mx-3 fs-4")
         p.text-muted= post.description
+        if (post.fulltext)
+            hr
+            div 
+                each line in post.fulltext.split('\n')
+                    p #{line}
         a(class="btn btn-success" href="/") Vissza

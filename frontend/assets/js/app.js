@@ -45,11 +45,11 @@ async function SubmitMod(){
         description: fm.description.value,
         fulltext: fm.fulltext.value,
     }
-    await fetch('http://localhost:8080/api/blogs'+document.querySelector('#modid'), {
+    await fetch('http://localhost:8080/api/blogs/'+document.querySelector('#modid').innerText, {
         method:'PATCH',
         headers:{'Content-Type':'application/json'},
         body: JSON.stringify(data)
-    }).then(res=>{return res.json()}).then(_data=>{
+    }).then(res=>res.json()).then(_data=>{
         console.log(_data);
     })
 }
@@ -59,6 +59,7 @@ async function Delete(id){
         headers:{'Content-Type':'application/json'}
     }).then(res=>{return res.json();}).then(_data=>{
         console.log(_data)
+        if (_data.deletedCount>0) document.querySelector('#_'+id).remove();
     });
 }
 async function Mod(id){
