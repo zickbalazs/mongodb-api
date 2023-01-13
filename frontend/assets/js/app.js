@@ -2,7 +2,7 @@ let form = document.querySelector('form');
 async function Post(){
     let data = {
         title: form.title.value,
-        description: form.title.value,
+        description: form.description.value,
         fulltext: form.fulltext.value,
         date: new Date()
     }
@@ -17,7 +17,9 @@ async function Post(){
             console.log(_data);
             if (_data.insertedId!=""){
                 alert('Successful upload!')
-                window.location.reload();
+                document.querySelector('form').title.value = "";
+                document.querySelector('form').description.value = "";
+                document.querySelector('form').fulltext.value = "";
             }
         });
     }

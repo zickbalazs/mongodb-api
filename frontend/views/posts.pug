@@ -4,10 +4,11 @@ main
         each post in posts
             div(class="col-lg-2 mb-3")
                 div(class="card post border border-2 rounded border-dark")
-                    div(class="bg-warning")
+                    div(class="bg-warning bg-gradient")
                         h3(class="mx-2 mt-3 mb-0 card-title")= post.title
                         h3(class="mx-2 mb-3 card-title fs-5") #{post.date.split('T')[0]} #{post.date.split('T')[1].split('.')[0]}
                     hr.my-0
                     div.card-body 
                         p= post.description
                         a(href=`/post/${post._id}` class="btn btn-primary") Read Post
+            
